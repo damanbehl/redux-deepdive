@@ -5,10 +5,11 @@ import Products from "./components/Shop/Products";
 
 function App() {
   const showCart = useSelector((state) => state.cart.showCart);
+  const cartItems = useSelector((state) => state.cart.items);
   return (
     <Layout>
       {showCart && <Cart />}
-      <Products />
+      <Products items={cartItems} />
     </Layout>
   );
 }
