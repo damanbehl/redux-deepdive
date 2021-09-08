@@ -21,12 +21,18 @@ function App() {
     dispatch(fetchCartData());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   fetchCartData()(dispatch);
+  // }, [dispatch]);
+
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [dispatch, cart]);
 
   return (
@@ -40,7 +46,7 @@ function App() {
       )}
       <Layout>
         {showCart && <Cart />}
-        <Products items={cart} />
+        <Products />
       </Layout>
     </Fragment>
   );
