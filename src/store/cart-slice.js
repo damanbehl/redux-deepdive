@@ -4,7 +4,6 @@ const initialCartState = {
   showCart: false,
   items: [],
   totalItems: 0,
-  totalPrice: 0,
   changed: false,
 };
 // { title: "Test Item", quantity: 3, total: 18, price: 6 }
@@ -15,7 +14,6 @@ const cartSlice = createSlice({
     replaceCart(state, action) {
       state.totalItems = action.payload.totalItems;
       state.items = action.payload.items;
-      state.totalPrice = action.payload.totalPrice;
     },
     showCart(state) {
       state.showCart = true;
@@ -25,7 +23,6 @@ const cartSlice = createSlice({
     },
     addItem(state, action) {
       const incoming = action.payload;
-      state.totalPrice += incoming.price;
       state.totalItems += 1;
       state.changed = true;
       const existItemIndex = state.items.findIndex(
@@ -44,7 +41,6 @@ const cartSlice = createSlice({
       const existItemIndex = state.items.findIndex((item) => item.id === id);
       state.changed = true;
       const existingItem = state.items[existItemIndex];
-      state.totalPrice -= existingItem.price;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
       } else {

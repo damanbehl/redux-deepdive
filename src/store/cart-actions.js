@@ -4,7 +4,9 @@ import { cartActions } from "./cart-slice";
 export const fetchCartData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("DUMMY");
+      const response = await fetch(
+        "DUMMY"
+      );
       if (!response.ok) {
         throw new Error("sending cart Data failed");
       }
@@ -17,7 +19,6 @@ export const fetchCartData = () => {
         cartActions.replaceCart({
           items: cartData.items || [],
           totalItems: cartData.totalItems || 0,
-          totalPrice: cartData.totalPrice || 0,
         })
       );
     } catch (error) {
@@ -44,14 +45,16 @@ export const sendCartData = (cart) => {
     );
 
     const sendRequest = async () => {
-      const response = await fetch("DUMMY", {
-        method: "PUT",
-        body: JSON.stringify({
-          items: cart.items,
-          totalItems: cart.totalItems,
-          totalPrice: cart.totalPrice,
-        }),
-      });
+      const response = await fetch(
+        "DUMMY",
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            items: cart.items,
+            totalItems: cart.totalItems,
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("sending cart Data failed");
       }
